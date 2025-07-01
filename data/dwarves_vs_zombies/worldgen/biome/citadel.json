@@ -1,0 +1,52 @@
+{
+	"temperature": 0.25,
+	"downfall": 0.5,
+	"has_precipitation": true,
+	"temperature_modifier": "none",
+	"creature_spawn_probability": 0,
+	"effects": {
+		"sky_color": 7441032,
+		"fog_color": 7441032,
+		"water_color": 5328472,
+		"water_fog_color": 2630973,
+		"grass_color": 8557459,
+		"foliage_color": 7501668,
+		"dry_foliage_color": 5264706,
+		"ambient_sound": "minecraft:ambient.soul_sand_valley.loop",
+		"mood_sound": {
+			"sound": "minecraft:ambient.warped_forest.mood",
+			"tick_delay": 2000,
+			"block_search_extent": 8,
+			"offset": 2
+		},
+		"additions_sound": {
+			"sound": "minecraft:ambient.soul_sand_valley.mood",
+			"tick_chance": 0.001
+		},
+		"particle": {
+			"options": {
+				"type": "minecraft:ash"
+			},
+			"probability": 0.0015
+		}
+	},
+	"spawners": {},
+	"spawn_costs": {},
+	"carvers": [],
+	"features": [
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[],
+		[
+			"minecraft:patch_bush",
+			"dwarves_vs_zombies:grave"
+		],
+		[]
+	]
+}

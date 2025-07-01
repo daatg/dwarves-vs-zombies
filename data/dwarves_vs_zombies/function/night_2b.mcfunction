@@ -1,0 +1,1 @@
+execute as @r[team=dwarves] run function dwarves_vs_zombies:mobs/become_lich

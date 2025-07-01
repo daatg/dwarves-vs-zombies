@@ -1,0 +1,2 @@
+weather rain 100d
+schedule function dwarves_vs_zombies:night_2 16000t

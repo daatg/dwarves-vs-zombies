@@ -1,0 +1,4 @@
+execute if score count playercount matches 1.. at @e[name="dwarves_vs_zombies__load_core"] run execute positioned ~ ~-2 ~15 run function dwarves_vs_zombies:carve_hall
+execute if score count playercount matches 5.. at @e[name="dwarves_vs_zombies__load_core"] run execute positioned ~ ~-2 ~-15 run function dwarves_vs_zombies:carve_hall
+execute if score count playercount matches 9.. at @e[name="dwarves_vs_zombies__load_core"] run execute positioned ~15 ~-2 ~ run function dwarves_vs_zombies:carve_hall
+execute if score count playercount matches 13.. at @e[name="dwarves_vs_zombies__load_core"] run execute positioned ~-15 ~-2 ~ run function dwarves_vs_zombies:carve_hall

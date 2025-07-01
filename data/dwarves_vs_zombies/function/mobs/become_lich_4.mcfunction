@@ -1,0 +1,1 @@
+execute as @a[tag=lich] run function dwarves_vs_zombies:mobs/respawn

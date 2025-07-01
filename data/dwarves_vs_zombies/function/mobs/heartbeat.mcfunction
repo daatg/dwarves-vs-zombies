@@ -1,0 +1,1 @@
+execute at @a[team=dwarves] as @a[team=dwarves] run playsound minecraft:entity.warden.heartbeat master @s ~ ~ ~ 1.0 1
