@@ -1,0 +1,2 @@
+execute align xyz run summon text_display ~20.5 ~7.5 ~-3.5 {text:{"text":"To The Surface","color":"gray"},Tags:[dwarves_vs_zombies__exit],billboard:"center",brightness:{block:15,sky:0}}
+execute align xyz run summon text_display ~-19.5 ~7.5 ~-3.5 {text:{"text":"To The Surface","color":"gray"},Tags:[dwarves_vs_zombies__exit],billboard:"center",brightness:{block:15,sky:0}}

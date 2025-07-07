@@ -1,5 +1,8 @@
 
 clear @s
+effect give @s instant_health 1 20 true
+effect give @s night_vision infinite 0 true
+item replace entity @s armor.head with zombie_head[enchantments={vanishing_curse:1}] 1
 
 attribute @s[scores={level=..1}] scale base set 1
 attribute @s[scores={level=2}] scale base set 1.5
@@ -11,7 +14,7 @@ attribute @s[scores={level=3}] step_height base set 1.2
 
 attribute @s[scores={level=..1}] movement_speed base set 0.1
 attribute @s[scores={level=2}] movement_speed base set 0.085
-attribute @s[scores={level=3}] scale base set 0.07
+attribute @s[scores={level=3}] movement_speed base set 0.07
 
 attribute @s[scores={level=..1}] max_health base set 20
 attribute @s[scores={level=2}] max_health base set 30

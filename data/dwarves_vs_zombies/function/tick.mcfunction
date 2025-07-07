@@ -13,14 +13,18 @@ clear @a[tag=brewer,tag=!builder] minecraft:cracked_stone_bricks
 
 team join zombies @a[team=dwarves,scores={deaths=1..}]
 team leave @a[team=dwarves,scores={deaths=1..}]
-tag @a[team=zombies,scores={deaths=1..}] add spawning
-scoreboard players set @a deaths 0
+clear @a[scores={deaths=1..}]
+execute as @a[team=zombies,scores={health=1..,deaths=1..}] run function dwarves_vs_zombies:mobs/reset
+scoreboard players set @a[scores={health=1..}] deaths 0
 
-execute as @a[team=zombies,scores={health=1..},tag=spawning,tag=creeper] run function dwarves_vs_zombies:mobs/creeper/setup
-execute as @a[team=zombies,scores={health=1..},tag=spawning,tag=broodmother] run function dwarves_vs_zombies:mobs/broodmother/setup
-execute as @a[team=zombies,scores={health=1..},tag=spawning,tag=zombie] run function dwarves_vs_zombies:mobs/zombie/setup
+execute as @a[team=zombies,scores={health=1..},tag=spawning] run function dwarves_vs_zombies:mobs/respawn
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run spreadplayers ~ ~ 0 100 false @a[team=zombies,tag=spawning,distance=..90]
+execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,distance=90..] run playsound ambient.basalt_deltas.mood master @a ~ ~ ~
+execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,tag=broodmother,distance=90..] run playsound entity.spider.step master @a ~ ~ ~
+execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,tag=creeper,distance=90..] run playsound ambient.underwater.loop.additions.rare master @a ~ ~ ~
+execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,tag=zombie,distance=90..] run playsound minecraft:block.gravel.break master @a ~ ~ ~
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run tag @a[team=zombies,scores={health=1..},tag=spawning,distance=90..] remove spawning
+
 
 execute at @e[tag=lich] as @e[tag=lich] run tp @e[tag=dwarves_vs_zombies__lich_display] @s
 execute at @e[tag=dwarves_vs_zombies__lich_display] as @e[tag=dwarves_vs_zombies__lich_display] run tp @s ~ ~ ~ ~ 0
@@ -39,7 +43,9 @@ execute at @e[tag=dwarves_vs_zombies__creeper] run playsound minecraft:block.not
 execute at @e[name="dwarves_vs_zombies__creeper_explode"] as @e[name="dwarves_vs_zombies__creeper_explode"] run tp @p @s
 execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=70}] run effect give @p darkness infinite 0 true
 execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=45}] run effect give @p blindness infinite 0 true
-execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=8}] run execute as @p[tag=creeper] run function dwarves_vs_zombies:mobs/respawn
+execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=8}] run execute as @p[tag=creeper] run gamemode adventure @s
+execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=8}] run execute as @p[tag=creeper] run execute at @s run tp @s ~ 1000 ~
+execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=8}] run execute as @p[tag=creeper] run damage @s 999 explosion
 execute as @e[name="dwarves_vs_zombies__creeper_explode",scores={creeper_beep=8}] run kill @s
 scoreboard players remove @e[scores={creeper_beep=1..}] creeper_beep 1
 execute as @e[tag=dwarves_vs_zombies__creeper] at @e[tag=dwarves_vs_zombies__creeper] run tp @s ~ ~0.02 ~
@@ -124,5 +130,50 @@ execute at @e[tag=dwarves_vs_zombies__broodmother_web,tag=passthrough,nbt={block
 execute at @e[tag=dwarves_vs_zombies__broodmother_web,tag=passthrough,nbt={block_state:{Name:"minecraft:air"}}] run particle white_smoke ~ ~ ~ 0.25 0.25 0.25 0 1
 execute as @e[tag=dwarves_vs_zombies__broodmother_web,tag=passthrough] align xyz run data merge entity @s {block_state:{Name:"minecraft:cobweb"}}
 
+execute at @e[tag=dwarves_vs_zombies__class_select_mother,tag=lit] run title @a[tag=!broodmother,distance=..5] actionbar {"text":"Right click to select","color":"gray"}
+execute at @e[tag=dwarves_vs_zombies__class_select_martyr,tag=lit] run title @a[tag=!creeper,distance=..5] actionbar {"text":"Right click to select","color":"gray"}
+execute at @e[tag=dwarves_vs_zombies__class_select_knight,tag=lit] run title @a[tag=!zombie,distance=..5] actionbar {"text":"Right click to select","color":"gray"}
+execute at @e[tag=dwarves_vs_zombies__class_select,tag=lit] run particle small_flame ~ ~0.1 ~ 0.4 0.2 0.4 0 2
+execute at @e[tag=dwarves_vs_zombies__class_select,tag=lit] run playsound minecraft:entity.warden.heartbeat ambient @a ~ ~ ~ 0.5
+execute at @e[tag=dwarves_vs_zombies__class_select,tag=lit] run particle flame ~ ~ ~ 0.4 0.2 0.4 0 2
+execute at @e[tag=dwarves_vs_zombies__class_select,tag=lit] run particle smoke ~ ~0.1 ~ 0.4 0.2 0.4 0 2
+execute at @e[tag=dwarves_vs_zombies__class_select,tag=lit] run setblock ~ ~1 ~ light[level=15]
+execute at @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run setblock ~ ~1 ~ barrier
+execute at @e[tag=dwarves_vs_zombies__select_level_2,tag=lit] run setblock ~ ~1 ~ light[level=15]
+execute at @e[tag=dwarves_vs_zombies__select_level_2,tag=!lit] run setblock ~ ~1 ~ air
+
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run playsound item.firecharge.use master @a ~ ~ ~ 0.4 1.5
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run playsound block.fire.ambient master @a ~ ~ ~ 0.2 1.4
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run playsound block.trial_spawner.detect_player master @a ~ ~ ~ 0.5 0.8
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run playsound block.trial_spawner.spawn_mob master @a ~ ~ ~ 0.7 0.6
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run particle large_smoke ~ ~0.5 ~ 0.4 0.2 0.4 0 20
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run particle smoke ~ ~0.75 ~ 0.4 0.5 0.4 0 20
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=!lit] run execute at @s if entity @a[distance=..5] run particle flame ~ ~0.75 ~ 0.4 0.5 0.4 0 20
+execute as @e[tag=dwarves_vs_zombies__class_select_mother,tag=!lit] run execute at @s if entity @a[distance=..5] run summon text_display ~ ~3.5 ~ {default_background:false,text:{text:"The Mother",color:"gold"},billboard:"center",brightness:{block:15,sky:0}}
+execute as @e[tag=dwarves_vs_zombies__class_select_martyr,tag=!lit] run execute at @s if entity @a[distance=..5] run summon text_display ~-0.6 ~2.7 ~-0.6 {default_background:false,text:{text:"The Martyr",color:"gold"},billboard:"center",brightness:{block:15,sky:0}}
+execute as @e[tag=dwarves_vs_zombies__class_select_knight,tag=!lit] run execute at @s if entity @a[distance=..5] run summon text_display ~ ~3.25 ~1 {default_background:false,text:{text:"The Servant",color:"gold"},billboard:"center",brightness:{block:15,sky:0}}
+
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=!lit] run execute at @s if entity @a[distance=..2.55] run summon text_display ~ ~1.5 ~ {text:{text:"Select class level",color:"gray"},billboard:"fixed",brightness:{block:15,sky:0},default_background:false,transformation:[-1.0000f,0.0000f,-0.0000f,0.0000f,0.0000f,1.0000f,0.0000f,0.0000f,0.0000f,0.0000f,-1.0000f,0.0000f,0.0000f,0.0000f,0.0000f,1.0000f]}
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=!lit] run execute at @s if entity @a[distance=..2.55] run summon text_display ~-1 ~0.5 ~ {default_background:false,text:{text:"III",color:"gold"},billboard:"center",brightness:{block:15,sky:0}}
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=!lit] run execute at @s if entity @a[distance=..2.55] run summon text_display ~ ~0.5 ~ {default_background:false,text:{text:"II",color:"gold"},billboard:"center",brightness:{block:15,sky:0}}
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=!lit] run execute at @s if entity @a[distance=..2.55] run summon text_display ~1 ~0.5 ~ {default_background:false,text:{text:"I",color:"gold"},billboard:"center",brightness:{block:15,sky:0}}
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=!lit] run execute at @s if entity @a[distance=..2.5] run playsound block.trial_spawner.open_shutter master @a ~ ~ ~ 0.2 1.4
+
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=lit] run execute at @s unless entity @a[distance=..5] run playsound block.trial_spawner.close_shutter master @a ~ ~ ~ 0.2 1.4
+execute as @e[tag=dwarves_vs_zombies__class_select,tag=lit] run execute at @s unless entity @a[distance=..5] run kill @e[type=text_display,distance=..5]
+
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=lit] run execute at @s unless entity @a[distance=..2.5] run playsound block.trial_spawner.close_shutter master @a ~ ~ ~ 0.2 1.4
+execute as @e[tag=dwarves_vs_zombies__select_level_2,tag=lit] run execute at @s unless entity @a[distance=..2.5] run kill @e[type=text_display,distance=..3]
+
+execute as @e[tag=dwarves_vs_zombies__select_level_2] run execute at @s if entity @a[distance=..2.5] run tag @s add lit
+execute as @e[tag=dwarves_vs_zombies__select_level_2] run execute at @s unless entity @a[distance=..2.5] run tag @s remove lit
+execute as @e[tag=dwarves_vs_zombies__class_select] run execute at @s if entity @a[distance=..5] run tag @s add lit
+execute as @e[tag=dwarves_vs_zombies__class_select] run execute at @s unless entity @a[distance=..5] run tag @s remove lit
+
+execute at @e[tag=dwarves_vs_zombies__exit] run tag @a[distance=..1.5] add spawning
+
+execute at @e[tag=dwarves_vs_zombies__class_select_knight] run execute as @a[team=zombies,distance=..30] run execute at @s run playsound entity.warden.nearby_close ambient @s ~ ~ ~ 0.1 0.2
+execute at @e[tag=dwarves_vs_zombies__class_select_knight] run stopsound @a[team=zombies,distance=..30] ambient ambient.soul_sand_valley.loop
+execute at @e[tag=dwarves_vs_zombies__class_select_knight] run stopsound @a[team=zombies,distance=..30] weather entity.lightning_bolt.thunder
 
 schedule function dwarves_vs_zombies:tick 1t replace

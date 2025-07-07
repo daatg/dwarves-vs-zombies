@@ -4,7 +4,6 @@ tag @a remove broodmother
 tag @s add creeper
 stopsound @s * entity.lightning_bolt.thunder
 scoreboard players set @s creeper_refill 0
-execute as @s at @s run playsound ambient.underwater.loop.additions.rare master @s
 item replace entity @s armor.head with creeper_head[enchantments={vanishing_curse:1}] 1
 effect give @s night_vision infinite 0 true
 clear @s

@@ -26,6 +26,7 @@ scoreboard objectives add creeper_beep dummy
 scoreboard objectives add creeper_refill dummy
 scoreboard objectives add deaths deathCount
 scoreboard objectives add health health
+scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt
 scoreboard players set count playercount 0
 scoreboard players set count structloaded 0
 scoreboard players set count runecountsm 0

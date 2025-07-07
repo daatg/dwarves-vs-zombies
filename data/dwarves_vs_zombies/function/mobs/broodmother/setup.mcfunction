@@ -3,7 +3,6 @@ tag @a remove broodmother
 tag @s add broodmother
 clear @s
 scoreboard players set @s creeper_refill 0
-execute as @s at @s run playsound entity.spider.step master @s
 item replace entity @s armor.head with player_head[enchantments={vanishing_curse:1},profile={name:MHF_Spider}] 1
 effect give @s night_vision infinite 0 true
 attribute @s movement_speed base set 0.11
