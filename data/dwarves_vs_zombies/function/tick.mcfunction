@@ -11,6 +11,60 @@ clear @a[tag=brewer,tag=!builder] minecraft:stone_bricks
 clear @a[tag=brewer,tag=!builder] minecraft:mossy_stone_bricks
 clear @a[tag=brewer,tag=!builder] minecraft:cracked_stone_bricks
 
+clear @a[team=zombies] minecraft:dirt
+clear @a[team=zombies] minecraft:coarse_dirt
+clear @a[team=zombies] minecraft:mossy_cobblestone
+clear @a[team=zombies] minecraft:cobblestone
+clear @a[team=zombies] minecraft:cobblestone_stairs
+clear @a[team=zombies] minecraft:cobblestone_slab
+clear @a[team=zombies] minecraft:dripstone_block
+clear @a[team=zombies] minecraft:pointed_dripstone
+clear @a[team=zombies] minecraft:string
+clear @a[team=zombies] minecraft:stone_bricks
+clear @a[team=zombies] minecraft:mossy_stone_bricks
+clear @a[team=zombies] minecraft:cracked_stone_bricks
+clear @a[team=zombies] minecraft:chiseled_stone_bricks
+clear @a[team=zombies] minecraft:chest
+clear @a[team=zombies] minecraft:furnace
+clear @a[team=zombies] minecraft:crafting_table
+clear @a[team=zombies] minecraft:blast_furnace
+clear @a[team=zombies] minecraft:smoker
+clear @a[team=zombies] minecraft:oak_boat
+clear @a[team=zombies] minecraft:oak_button
+clear @a[team=zombies] minecraft:oak_chest_boat
+clear @a[team=zombies] minecraft:oak_hanging_sign
+clear @a[team=zombies] minecraft:oak_log
+clear @a[team=zombies] minecraft:oak_fence
+clear @a[team=zombies] minecraft:oak_trapdoor
+clear @a[team=zombies] minecraft:oak_door
+clear @a[team=zombies] minecraft:oak_fence_gate
+clear @a[team=zombies] minecraft:oak_sign
+clear @a[team=zombies] minecraft:oak_slab
+clear @a[team=zombies] minecraft:oak_stairs
+clear @a[team=zombies] minecraft:oak_wood
+clear @a[team=zombies] minecraft:oak_planks
+clear @a[team=zombies] minecraft:oak_pressure_plate
+clear @a[team=zombies] minecraft:glowstone_dust
+clear @a[team=zombies] minecraft:brewing_stand
+clear @a[team=zombies] minecraft:sugar_cane
+clear @a[team=zombies] minecraft:redstone
+
+scoreboard players set @a damage_taken 0
+bossbar set dwarves_vs_zombies:blood_1 players @a[team=zombies]
+bossbar set dwarves_vs_zombies:blood_2 players @a[team=zombies]
+execute if score count damage_dealt matches ..199 run bossbar set dwarves_vs_zombies:blood_1 visible true
+execute if score count damage_dealt matches ..199 run bossbar set dwarves_vs_zombies:blood_2 visible false
+execute if score count damage_dealt matches 200.. run bossbar set dwarves_vs_zombies:blood_1 visible false
+execute if score count damage_dealt matches 200.. run bossbar set dwarves_vs_zombies:blood_2 visible true
+execute as @a[team=zombies] run scoreboard players operation count damage_dealt += @s damage_dealt
+execute as @a[team=zombies] run scoreboard players operation count blood_2 = count damage_dealt
+execute as @a[team=zombies] run scoreboard players remove count blood_2 200
+scoreboard players set @a[team=zombies] damage_dealt 0
+execute store result storage dwarves_vs_zombies blood int 1 run scoreboard players get count damage_dealt
+execute store result storage dwarves_vs_zombies blood_2 int 1 run scoreboard players get count blood_2
+execute run function dwarves_vs_zombies:set_bossbar with storage dwarves_vs_zombies
+execute if score count damage_dealt matches 200.. run function dwarves_vs_zombies:set_bossbar_2 with storage dwarves_vs_zombies
+
 team join zombies @a[team=dwarves,scores={deaths=1..}]
 team leave @a[team=dwarves,scores={deaths=1..}]
 clear @a[scores={deaths=1..}]
@@ -32,7 +86,7 @@ execute at @e[tag=dwarves_vs_zombies__lich_display] as @e[tag=dwarves_vs_zombies
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} at @e[name="dwarves_vs_zombies__load_marker",limit=1] run tp @e[name="dwarves_vs_zombies__load_marker",limit=1] ~ ~0.01 ~
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} run tp @a @e[name="dwarves_vs_zombies__load_marker",limit=1]
 
-effect give @a[team=zombies] saturation 1 0 true
+effect give @a[team=zombies,scores={food=..19}] saturation 1 0 true
 
 execute at @e[tag=dwarves_vs_zombies__become_lich] run tp @e[tag=dwarves_vs_zombies__become_lich] ~ ~0.01 ~
 execute at @e[tag=dwarves_vs_zombies__lich_body] run tp @e[tag=dwarves_vs_zombies__lich_body] ~ ~0.01 ~

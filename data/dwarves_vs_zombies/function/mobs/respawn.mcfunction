@@ -3,6 +3,7 @@ effect give @s darkness 3 0 true
 effect give @s blindness 2 0 true
 clear @s
 gamemode adventure @s
+attribute @s block_interaction_range base set 4.5
 tag @s add spawning
 tp @s @e[tag=dwarves_vs_zombies__dwarf_center,limit=1,sort=nearest]
 execute at @a[tag=lich] as @a[tag=lich] run function dwarves_vs_zombies:mobs/lich_setup

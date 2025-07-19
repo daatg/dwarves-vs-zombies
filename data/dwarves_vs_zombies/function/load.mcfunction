@@ -3,6 +3,8 @@ gamerule keepInventory true
 gamerule doVinesSpread false
 gamerule doMobLoot false
 gamerule doMobSpawning false
+gamerule doImmediateRespawn true
+gamerule doInsomnia false
 team add dwarves {"text":"Dwarves"}
 team add zombies {"text":"Zombies"}
 team modify dwarves friendlyFire false
@@ -24,9 +26,13 @@ scoreboard objectives add triangulate_sign dummy
 scoreboard objectives add triangulate_CMP dummy
 scoreboard objectives add creeper_beep dummy
 scoreboard objectives add creeper_refill dummy
+scoreboard objectives add blood_2 dummy
 scoreboard objectives add deaths deathCount
 scoreboard objectives add health health
+scoreboard objectives add food food
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt
+scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
+scoreboard players set count blood_2 0
 scoreboard players set count playercount 0
 scoreboard players set count structloaded 0
 scoreboard players set count runecountsm 0
@@ -36,6 +42,17 @@ scoreboard players set count triangulate_HOLD 0
 scoreboard players set count triangulate_200 200
 scoreboard players set count triangulate_sign -1
 scoreboard players set count triangulate_CMP 0
+bossbar add dwarves_vs_zombies:blood_1 {"text":"Blood Collected for Level II","color":"red"}
+bossbar set dwarves_vs_zombies:blood_1 visible true
+bossbar set dwarves_vs_zombies:blood_1 color red
+bossbar set dwarves_vs_zombies:blood_1 style notched_20
+bossbar set dwarves_vs_zombies:blood_1 max 200
+bossbar add dwarves_vs_zombies:blood_2 {"text":"Blood Collected for Level III","color":"red"}
+bossbar set dwarves_vs_zombies:blood_2 visible true
+bossbar set dwarves_vs_zombies:blood_2 color red
+bossbar set dwarves_vs_zombies:blood_2 style notched_20
+bossbar set dwarves_vs_zombies:blood_2 max 200
+
 team leave @a
 tag @a remove builder
 tag @a remove fletcher

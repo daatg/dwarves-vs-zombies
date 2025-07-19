@@ -3,6 +3,7 @@ kill @e[type=marker,name="dwarves_vs_zombies__load_marker"]
 kill @e[type=marker,tag=dwarves_vs_zombies__dwarf_center]
 clear @a
 effect clear @a
+gamerule doDaylightCycle true
 tag @a remove builder
 tag @a remove smithy
 tag @a remove fletcher

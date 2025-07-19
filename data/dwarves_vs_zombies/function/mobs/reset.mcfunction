@@ -2,6 +2,7 @@ clear @s
 effect clear @s
 effect give @s instant_health infinite 0 true
 effect give @s saturation infinite 0 true
+attribute @s block_interaction_range base set 0
 attribute @s scale base set 1
 attribute @s step_height base set 0.6
 attribute @s movement_speed base set 0.1

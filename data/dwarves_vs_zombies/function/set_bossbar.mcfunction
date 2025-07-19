@@ -1,0 +1,1 @@
+$bossbar set dwarves_vs_zombies:blood_1 value $(blood)

@@ -1,0 +1,17 @@
+{
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions": {
+				"damage": {
+					"source_entity": {
+						"type": "minecraft:creeper"
+					}
+				}
+			}
+		}
+	},
+	"rewards": {
+		"function": "dwarves_vs_zombies:mobs/creeper/take_creeper_damage"
+	}
+}

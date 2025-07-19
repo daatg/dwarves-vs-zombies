@@ -1,5 +1,5 @@
 stopsound @s * entity.player.burp
-effect clear @s
+effect clear @s invisibility
 execute if score @s level matches ..1 run summon marker ~ ~ ~ {Tags:[dwarves_vs_zombies__creeper]}
 execute if score @s level matches 2 run summon marker ~ ~ ~ {Tags:[dwarves_vs_zombies__creeper,dwarves_vs_zombies__creeper_lava]}
 
