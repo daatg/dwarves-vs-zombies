@@ -1,6 +1,7 @@
 time set 23500
 effect clear @a
 tp @a @e[name="dwarves_vs_zombies__load_core",limit=1]
+execute at @r run tp @a ~ ~-1 ~
 execute at @r run summon marker ~ ~ ~ {Tags:["dwarves_vs_zombies__dwarf_center"]}
 execute at @r run spawnpoint @a
 execute at @r run setworldspawn ~ ~ ~

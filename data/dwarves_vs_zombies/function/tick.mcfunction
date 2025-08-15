@@ -19,7 +19,6 @@ clear @a[team=zombies] minecraft:cobblestone_stairs
 clear @a[team=zombies] minecraft:cobblestone_slab
 clear @a[team=zombies] minecraft:dripstone_block
 clear @a[team=zombies] minecraft:pointed_dripstone
-clear @a[team=zombies] minecraft:string
 clear @a[team=zombies] minecraft:stone_bricks
 clear @a[team=zombies] minecraft:mossy_stone_bricks
 clear @a[team=zombies] minecraft:cracked_stone_bricks
@@ -81,7 +80,16 @@ execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run tag @a[team=
 
 
 execute at @e[tag=lich] as @e[tag=lich] run tp @e[tag=dwarves_vs_zombies__lich_display] @s
-execute at @e[tag=dwarves_vs_zombies__lich_display] as @e[tag=dwarves_vs_zombies__lich_display] run tp @s ~ ~ ~ ~ 0
+execute at @e[tag=dwarves_vs_zombies__lich_display] as @e[tag=dwarves_vs_zombies__lich_display] positioned ~ ~6 ~ run tp @s ^ ^ ^1 ~ 0
+
+execute at @a[tag=lich,tag=phasing] run playsound entity.warden.heartbeat master @a ~ ~ ~ 2 2
+execute at @a[tag=lich,tag=phasing] run particle mycelium ~ ~1 ~ 0.25 0.25 0.25 0.01 20
+execute as @a[tag=lich,gamemode=creative] at @a[tag=lich,gamemode=creative] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run function dwarves_vs_zombies:mobs/lich/become_survival
+execute as @a[tag=lich,gamemode=creative] at @a[tag=lich,gamemode=creative] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run effect clear @s oozing
+execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run function dwarves_vs_zombies:mobs/lich/become_flying
+execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run effect clear @s oozing
+execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:weaving":{amplifier:{min:0}}}}} run function dwarves_vs_zombies:mobs/lich/phase
+execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:weaving":{amplifier:{min:0}}}}} run effect clear @s weaving
 
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} at @e[name="dwarves_vs_zombies__load_marker",limit=1] run tp @e[name="dwarves_vs_zombies__load_marker",limit=1] ~ ~0.01 ~
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} run tp @a @e[name="dwarves_vs_zombies__load_marker",limit=1]
