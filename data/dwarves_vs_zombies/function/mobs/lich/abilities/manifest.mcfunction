@@ -1,6 +1,8 @@
 gamemode adventure @s
+advancement revoke @s only dwarves_vs_zombies:abilities/lich/manifest
 stopsound @a * entity.player.burp
 effect clear @s invisibility
+effect clear @s oozing
 tp @s @e[tag=dwarves_vs_zombies__lich_display,limit=1]
 attribute @s scale base set 1
 attribute @s minecraft:block_interaction_range base set 4.5

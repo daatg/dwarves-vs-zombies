@@ -24,6 +24,7 @@ clear @a[team=zombies] minecraft:mossy_stone_bricks
 clear @a[team=zombies] minecraft:cracked_stone_bricks
 clear @a[team=zombies] minecraft:chiseled_stone_bricks
 clear @a[team=zombies] minecraft:chest
+clear @a[team=zombies] minecraft:trapped_chest
 clear @a[team=zombies] minecraft:furnace
 clear @a[team=zombies] minecraft:crafting_table
 clear @a[team=zombies] minecraft:blast_furnace
@@ -84,12 +85,23 @@ execute at @e[tag=dwarves_vs_zombies__lich_display] as @e[tag=dwarves_vs_zombies
 
 execute at @a[tag=lich,tag=phasing] run playsound entity.warden.heartbeat master @a ~ ~ ~ 2 2
 execute at @a[tag=lich,tag=phasing] run particle mycelium ~ ~1 ~ 0.25 0.25 0.25 0.01 20
-execute as @a[tag=lich,gamemode=creative] at @a[tag=lich,gamemode=creative] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run function dwarves_vs_zombies:mobs/lich/become_survival
-execute as @a[tag=lich,gamemode=creative] at @a[tag=lich,gamemode=creative] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run effect clear @s oozing
-execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run function dwarves_vs_zombies:mobs/lich/become_flying
-execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:oozing":{amplifier:{min:0}}}}} run effect clear @s oozing
-execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:weaving":{amplifier:{min:0}}}}} run function dwarves_vs_zombies:mobs/lich/phase
-execute as @a[tag=lich,tag=grounded] at @a[tag=lich,tag=grounded] if predicate {condition:"minecraft:entity_properties",entity:"this",predicate:{effects:{"minecraft:weaving":{amplifier:{min:0}}}}} run effect clear @s weaving
+
+
+execute at @e[tag=dwarves_vs_zombies__spawner] run playsound block.chain.place master @a ~ ~ ~ 0.4 0.8
+execute at @e[tag=dwarves_vs_zombies__spawner] run particle smoke ~ ~ ~ 0 0 0 0.005 4
+execute at @e[tag=dwarves_vs_zombies__spawner] run fill ~-1 ~ ~-1 ~1 ~ ~2 cracked_polished_blackstone_bricks replace cracked_stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] run fill ~-2 ~ ~-1 ~2 ~ ~1 deepslate_bricks replace stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] run fill ~-1 ~ ~-2 ~1 ~ ~1 cracked_deepslate_bricks replace mossy_stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] run fill ~-1 ~ ~-2 ~2 ~ ~1 chiseled_polished_blackstone replace chiseled_stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] if block ~ ~-1 ~ #replaceable run fill ~ ~ ~ ~ ~1 ~ chain replace #replaceable
+execute at @e[tag=dwarves_vs_zombies__spawner] unless block ~ ~-1 ~ #replaceable run fill ~-3 ~-2 ~-3 ~2 ~1 ~2 cracked_polished_blackstone_bricks replace cracked_stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] unless block ~ ~-1 ~ #replaceable run fill ~-2 ~-2 ~-2 ~3 ~1 ~2 deepslate_bricks replace stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] unless block ~ ~-1 ~ #replaceable run fill ~-3 ~-1 ~-2 ~2 ~2 ~3 cracked_deepslate_bricks replace mossy_stone_bricks
+execute at @e[tag=dwarves_vs_zombies__spawner] unless block ~ ~-1 ~ #replaceable run playsound item.mace.smash_ground_heavy master @a ~ ~ ~ 1.0 0.5 0.4
+execute at @e[tag=dwarves_vs_zombies__spawner] unless block ~ ~-1 ~ #replaceable run tag @e[tag=dwarves_vs_zombies__spawner,limit=1,sort=nearest] remove dwarves_vs_zombies__spawner
+
+execute at @e[tag=dwarves_vs_zombies__banshee] run playsound minecraft:entity.goat.screaming.prepare_ram hostile @a ~ ~ ~ 0.4 1.4
+execute at @e[tag=dwarves_vs_zombies__banshee] run playsound minecraft:entity.goat.screaming.prepare_ram hostile @a ~ ~ ~ 0.4 1.44
 
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} at @e[name="dwarves_vs_zombies__load_marker",limit=1] run tp @e[name="dwarves_vs_zombies__load_marker",limit=1] ~ ~0.01 ~
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} run tp @a @e[name="dwarves_vs_zombies__load_marker",limit=1]

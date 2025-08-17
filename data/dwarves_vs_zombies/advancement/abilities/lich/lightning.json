@@ -1,0 +1,18 @@
+{
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:consume_item",
+			"conditions": {
+				"player": {
+					"team": "zombies"
+				},
+				"item": {
+					"items": "minecraft:twisting_vines"
+				}
+			}
+		}
+	},
+	"rewards": {
+		"function": "dwarves_vs_zombies:mobs/lich/abilities/lightning"
+	}
+}
