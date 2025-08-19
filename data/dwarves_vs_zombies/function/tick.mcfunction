@@ -65,6 +65,12 @@ execute store result storage dwarves_vs_zombies blood_2 int 1 run scoreboard pla
 execute run function dwarves_vs_zombies:set_bossbar with storage dwarves_vs_zombies
 execute if score count damage_dealt matches 200.. run function dwarves_vs_zombies:set_bossbar_2 with storage dwarves_vs_zombies
 
+execute if score count damage_dealt matches 200.. unless entity @e[tag=lich,tag=manifest_2] run function dwarves_vs_zombies:mobs/lich/abilities/items/manifest
+execute if score count damage_dealt matches 200.. unless entity @e[tag=lich,tag=manifest_2] run tag @a[tag=lich] add manifest_2
+execute if score count damage_dealt matches 400.. unless entity @e[tag=lich,tag=manifest_3] run function dwarves_vs_zombies:mobs/lich/abilities/items/manifest
+execute if score count damage_dealt matches 400.. unless entity @e[tag=lich,tag=manifest_3] run tag @a[tag=lich] add manifest_3
+
+
 team join zombies @a[team=dwarves,scores={deaths=1..}]
 team leave @a[team=dwarves,scores={deaths=1..}]
 clear @a[scores={deaths=1..}]
@@ -78,6 +84,14 @@ execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,tag=creeper,distance=90..] run playsound ambient.underwater.loop.additions.rare master @a ~ ~ ~
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,tag=zombie,distance=90..] run playsound minecraft:block.gravel.break master @a ~ ~ ~
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run tag @a[team=zombies,scores={health=1..},tag=spawning,distance=90..] remove spawning
+
+scoreboard players remove @a[tag=lich,gamemode=creative,scores={lich_refill_1=1..}] lich_refill_1 1
+scoreboard players remove @a[tag=lich,gamemode=creative,scores={lich_refill_2=1..}] lich_refill_2 1
+execute as @a[tag=lich,gamemode=creative,scores={lich_refill_1=0}] run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_1
+execute if score count damage_dealt matches ..199 run scoreboard players set @a[tag=lich,gamemode=creative,scores={lich_refill_1=0}] lich_refill_1 400
+execute if score count damage_dealt matches 200.. run scoreboard players set @a[tag=lich,gamemode=creative,scores={lich_refill_1=0}] lich_refill_1 300
+execute as @a[tag=lich,gamemode=creative,scores={lich_refill_2=0}] if score count damage_dealt matches 200.. run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_2
+scoreboard players set @a[tag=lich,gamemode=creative,scores={lich_refill_2=0}] lich_refill_2 1800
 
 
 execute at @e[tag=lich] as @e[tag=lich] run tp @e[tag=dwarves_vs_zombies__lich_display] @s
@@ -102,6 +116,44 @@ execute at @e[tag=dwarves_vs_zombies__spawner] unless block ~ ~-1 ~ #replaceable
 
 execute at @e[tag=dwarves_vs_zombies__banshee] run playsound minecraft:entity.goat.screaming.prepare_ram hostile @a ~ ~ ~ 0.4 1.4
 execute at @e[tag=dwarves_vs_zombies__banshee] run playsound minecraft:entity.goat.screaming.prepare_ram hostile @a ~ ~ ~ 0.4 1.44
+
+
+execute as @e[tag=dwarves_vs_zombies__giant] run execute at @s if data entity @s {HurtTime:10s} run playsound entity.zoglin.ambient hostile @a ~ ~ ~ 2.0 0.9
+execute as @e[tag=dwarves_vs_zombies__giant] run execute store result score @s giant_health run data get entity @s Health 1.0
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s positioned as @s run summon creeper ^4 ^ ^-2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:5,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b,active_effects:[{id:"minecraft:invisibility",duration:4,show_particles:0b}]}
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s positioned as @s run summon creeper ^8 ^ ^-2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:6,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b,active_effects:[{id:"minecraft:invisibility",duration:5,show_particles:0b}]}
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s positioned as @s run summon creeper ^12 ^ ^-2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:7,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b,active_effects:[{id:"minecraft:invisibility",duration:6,show_particles:0b}]}
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s run playsound entity.zoglin.death hostile @a ~ ~ ~ 2.0 0.5
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s run playsound entity.zoglin.death hostile @a ~ ~ ~ 2.0 0.9
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s run playsound entity.creaking.death hostile @a ~ ~ ~ 2.0 0.9
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_health=0..200}] run execute at @s run kill @s
+
+scoreboard players remove @e[tag=dwarves_vs_zombies__giant,scores={giant_jump=1..}] giant_jump 1
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_jump=0}] run tag @s add jumped
+execute at @e[tag=dwarves_vs_zombies__giant,scores={giant_jump=20}] run playsound entity.zoglin.ambient hostile @a ~ ~ ~ 2.0 0.9
+execute at @e[tag=dwarves_vs_zombies__giant,scores={giant_jump=20}] run playsound entity.zombie.infect hostile @a ~ ~ ~ 2.0 1.2
+execute as @e[tag=dwarves_vs_zombies__giant,scores={giant_jump=20}] run data merge entity @s {Motion:[0.0,2.0,0.0]}
+scoreboard players set @e[tag=dwarves_vs_zombies__giant,scores={giant_jump=0}] giant_jump 400
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~2 ~ ~2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~2 ~ ~-2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~-2 ~ ~2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~-2 ~ ~-2 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~3 ~ ~ {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~-3 ~ ~ {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~ ~ ~3 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon creeper ~ ~ ~-3 {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:2,ignited:1b,Silent:1b}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run effect give @s resistance 1 4 true
+
+
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~3 ~ ~ {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~-3 ~ ~ {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~ ~ ~3 {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~ ~ ~-3 {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~2 ~ ~2 {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~-2 ~ ~2 {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~-2 ~ ~2 {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run summon wind_charge ~-2 ~ ~-2 {Motion:[0d,-1d,0d],Silent:1b,Team:zombies,attributes:[{id:safe_fall_distance,base:12f}]}
+execute as @e[tag=dwarves_vs_zombies__giant,tag=jumped,scores={giant_jump=1..}] run execute at @s if data entity @s {OnGround:1b} run tag @s remove jumped
 
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} at @e[name="dwarves_vs_zombies__load_marker",limit=1] run tp @e[name="dwarves_vs_zombies__load_marker",limit=1] ~ ~0.01 ~
 execute if data storage dwarves_vs_zombies:start_sequence {Loading:1b} run tp @a @e[name="dwarves_vs_zombies__load_marker",limit=1]
@@ -137,7 +189,7 @@ execute as @e[tag=dwarves_vs_zombies__creeper] at @e[tag=dwarves_vs_zombies__cre
 execute as @e[tag=dwarves_vs_zombies__creeper] at @e[tag=dwarves_vs_zombies__creeper] run particle minecraft:end_rod ^-0.6 ^1.8 ^ 0 0 0 0.01 1
 execute as @e[tag=dwarves_vs_zombies__creeper] at @e[tag=dwarves_vs_zombies__creeper] run particle minecraft:end_rod ^ ^2.1 ^ 0 0 0 0.01 1
 execute as @e[tag=dwarves_vs_zombies__creeper] at @e[tag=dwarves_vs_zombies__creeper] run particle minecraft:end_rod ^ ^2.4 ^ 0 0 0 0.01 1
-execute at @e[tag=dwarves_vs_zombies__creeper,scores={creeper_beep=2}] run summon creeper ~ ~0.5 ~ {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:5,ignited:1b}
+execute at @e[tag=dwarves_vs_zombies__creeper,scores={creeper_beep=2}] run summon creeper ~ ~0.5 ~ {Team:"zombies",NoAI:1b,NoGravity:1b,Fuse:1,Invulnerable:1b,ExplosionRadius:5,ignited:1b,Silent:1b}
 execute at @e[tag=dwarves_vs_zombies__creeper,scores={creeper_beep=1}] run fill ~ ~1 ~ ~ ~1 ~ air replace minecraft:light[level=15]
 execute at @e[tag=dwarves_vs_zombies__creeper,scores={creeper_beep=2}] run summon lightning_bolt ~ ~ ~
 execute at @e[tag=dwarves_vs_zombies__creeper,scores={creeper_beep=2}] run summon lightning_bolt ~1 ~ ~

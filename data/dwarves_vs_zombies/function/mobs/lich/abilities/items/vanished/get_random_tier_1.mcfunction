@@ -1,5 +1,7 @@
 execute if entity @a[tag=lich,gamemode=creative] run execute store result storage dwarves_vs_zombies lich_random int 1.0 run random value 0..3
 
+execute if entity @a[tag=lich,gamemode=creative] run execute if data storage dwarves_vs_zombies {lich_random:0} if entity @a[tag=lich,nbt={Inventory:[{id:"minecraft:candle"},{id:"minecraft:chain"},{id:"minecraft:twisting_vines"},{id:"minecraft:feather"}]}] run return fail
+
 execute if entity @a[tag=lich,gamemode=creative] run execute if data storage dwarves_vs_zombies {lich_random:0} if entity @a[tag=lich,nbt={Inventory:[{id:"minecraft:candle"}]}] run return run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_1
 execute if entity @a[tag=lich,gamemode=creative] run execute if data storage dwarves_vs_zombies {lich_random:0} unless entity @a[tag=lich,nbt={Inventory:[{id:"minecraft:candle"}]}] run give @a[tag=lich] candle[enchantments={vanishing_curse:1},food={nutrition:0,saturation:0,can_always_eat:1b},consumable={consume_seconds:0,animation:none,sound:"entity.breeze.land"},custom_name=[{"text":"Snuff Out","italic":false,"color":"dark_red"}],lore=[[{"text":"Eventually all wax runs dry.","italic":false,"color":"blue"}],"",[{"text":"Use item (","italic":false,"color":"gray"},{"text":"Right Click","italic":false,"color":"dark_red"},{"text":") to ","italic":false,"color":"gray"},{"text":"Extinguish Lights","italic":false,"color":"dark_red"}]],enchantment_glint_override=false,tooltip_display={hidden_components:[enchantments]}]
 

@@ -1,6 +1,8 @@
 stopsound @a * entity.player.burp
 advancement revoke @s only dwarves_vs_zombies:abilities/lich/to_dust
 clear @s pale_oak_sapling
+fill ~-10 ~10 ~-10 ~10 ~-10 ~10 air replace fire
+fill ~-10 ~10 ~-10 ~10 ~-10 ~10 air replace torch
 fill ~-10 ~10 ~-10 ~10 ~-10 ~10 air replace glowstone
 fill ~-10 ~10 ~-10 ~10 ~-10 ~10 suspicious_gravel replace cracked_stone_bricks
 fill ~-10 ~10 ~-10 ~10 ~-10 ~10 gravel replace mossy_stone_bricks

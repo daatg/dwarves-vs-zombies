@@ -41,10 +41,15 @@ scoreboard objectives add creeper_beep dummy
 scoreboard objectives add creeper_refill dummy
 scoreboard objectives add blood_2 dummy
 scoreboard objectives add deaths deathCount
+scoreboard objectives add giant_health dummy
 scoreboard objectives add health health
 scoreboard objectives add food food
 scoreboard objectives add damage_dealt minecraft.custom:minecraft.damage_dealt
 scoreboard objectives add damage_taken minecraft.custom:minecraft.damage_taken
+scoreboard objectives add giant_jump dummy 
+scoreboard objectives add current_dwarves dummy 
+scoreboard objectives add lich_refill_1 dummy 
+scoreboard objectives add lich_refill_2 dummy 
 scoreboard players set count blood_2 0
 scoreboard players set count playercount 0
 scoreboard players set count structloaded 0
@@ -77,6 +82,9 @@ tag @a remove creeper
 tag @a remove lich
 tag @a remove spawning
 tag @a remove broodmother
+tag @a remove grounded
+tag @a remove manifest_2
+tag @a remove manifest_3
 scoreboard players set @a level 1
 execute as @a run scoreboard players add count playercount 1
 schedule function dwarves_vs_zombies:tick 1t replace
