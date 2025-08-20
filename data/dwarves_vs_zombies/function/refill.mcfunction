@@ -48,9 +48,9 @@ give @a[tag=smithy,scores={level=3}] minecraft:gunpowder 9
 give @a[tag=smithy,scores={level=3}] minecraft:raw_iron 4
 give @a[tag=smithy,scores={level=3}] minecraft:redstone 2
 give @a[tag=smithy,scores={level=3}] minecraft:magma_block 1
-give @a[tag=smithy,scores={level=3}] minecraft:netherite_scrap 1
+give @a[tag=smithy,scores={level=3}] minecraft:diamond 1
 
-give @a[tag=fletcher,scores={level=1}] minecraft:oak_planks 2
+give @a[tag=fletcher,scores={level=1}] minecraft:oak_planks 3
 give @a[tag=fletcher,scores={level=1}] minecraft:sand 4
 give @a[tag=fletcher,scores={level=1}] minecraft:gravel 2
 give @a[tag=fletcher,scores={level=1}] minecraft:feather 4
@@ -58,6 +58,7 @@ give @a[tag=fletcher,scores={level=1}] minecraft:string 1
 give @a[tag=fletcher,scores={level=1}] minecraft:leather 4
 
 give @a[tag=fletcher,scores={level=2}] minecraft:oak_log 1
+give @a[tag=fletcher,scores={level=2}] minecraft:oak_planks 2
 give @a[tag=fletcher,scores={level=2}] minecraft:sand 6
 give @a[tag=fletcher,scores={level=2}] minecraft:gravel 3
 give @a[tag=fletcher,scores={level=2}] minecraft:feather 6
@@ -66,8 +67,7 @@ give @a[tag=fletcher,scores={level=2}] minecraft:leather 6
 give @a[tag=fletcher,scores={level=2}] minecraft:fire_charge 1
 give @a[tag=fletcher,scores={level=2}] minecraft:apple 1
 
-give @a[tag=fletcher,scores={level=3}] minecraft:oak_log 1
-give @a[tag=fletcher,scores={level=3}] minecraft:oak_planks 2
+give @a[tag=fletcher,scores={level=3}] minecraft:oak_log 2
 give @a[tag=fletcher,scores={level=3}] minecraft:sand 8
 give @a[tag=fletcher,scores={level=3}] minecraft:gravel 4
 give @a[tag=fletcher,scores={level=3}] minecraft:feather 8
@@ -101,6 +101,7 @@ give @a[tag=brewer,scores={level=3}] minecraft:nether_wart 3
 give @a[tag=brewer,scores={level=3}] minecraft:sugar_cane 9
 give @a[tag=brewer,scores={level=3}] minecraft:raw_gold 2
 give @a[tag=brewer,scores={level=3}] minecraft:slime_ball 1
+give @a[tag=brewer,scores={level=3}] minecraft:melon 1
 give @a[tag=brewer,scores={level=3}] minecraft:spider_eye 1
 give @a[tag=brewer,scores={level=3}] minecraft:lapis_lazuli 1
 give @a[tag=brewer,scores={level=3}] minecraft:lapis_ore 4

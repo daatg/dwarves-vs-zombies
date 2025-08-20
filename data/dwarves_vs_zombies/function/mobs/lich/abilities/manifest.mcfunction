@@ -2,11 +2,12 @@ gamemode adventure @s
 advancement revoke @s only dwarves_vs_zombies:abilities/lich/manifest
 stopsound @a * entity.player.burp
 effect clear @s invisibility
-effect clear @s oozing
+effect give @s night_vision infinite 0 true
 # tp @s @e[tag=dwarves_vs_zombies__lich_display,limit=1]
 attribute @s scale base set 1
 attribute @s minecraft:block_interaction_range base set 4.5
 attribute @s minecraft:block_interaction_range base set 3
+execute as @a[tag=lich] run attribute @s attack_damage base set 7.0
 clear @s
 attribute @s block_interaction_range base set 4.0
 attribute @s entity_interaction_range base set 2.0

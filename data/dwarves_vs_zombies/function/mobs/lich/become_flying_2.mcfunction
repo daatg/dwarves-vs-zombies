@@ -9,7 +9,7 @@ effect give @a[tag=lich] invisibility infinite 0 true
 item replace entity @a[tag=lich] armor.head with minecraft:air
 clear @a[tag=lich]
 tag @a[tag=lich] remove grounded
-attribute @s attack_damage base set 7.0
+execute as @a[tag=lich] run attribute @s attack_damage base set 7.0
 effect give @a[tag=lich] night_vision infinite 0 true
 scoreboard players add count current_dwarves 1
 scoreboard players operation count current_dwarves -= count playercount
