@@ -13,3 +13,4 @@ attribute @s attack_knockback base set 0
 attribute @s attack_damage base set 1
 attribute @s armor base set 0
 attribute @s armor_toughness base set 0
+execute if entity @s[tag=lich] run function dwarves_vs_zombies:mobs/lich/become_flying_2

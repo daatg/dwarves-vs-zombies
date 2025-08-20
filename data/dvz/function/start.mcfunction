@@ -1,0 +1,1 @@
+function dwarves_vs_zombies:start_game

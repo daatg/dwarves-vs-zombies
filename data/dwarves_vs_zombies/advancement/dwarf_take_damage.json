@@ -5,13 +5,13 @@
 			"conditions": {
 				"damage": {
 					"source_entity": {
-						"type": "minecraft:creeper"
+						"team": "zombies"
 					}
 				}
 			}
 		}
 	},
 	"rewards": {
-		"function": "dwarves_vs_zombies:mobs/creeper/take_creeper_damage"
+		"function": "dwarves_vs_zombies:dwarf_take_damage"
 	}
 }

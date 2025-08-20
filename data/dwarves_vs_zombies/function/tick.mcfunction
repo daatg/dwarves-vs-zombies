@@ -1,3 +1,6 @@
+execute unless data storage dwarves_vs_zombies:generic {ActiveGame:1b} run return fail
+
+scoreboard players add count timer 1
 scoreboard players set count runecountsm 0
 scoreboard players set count runecountlg 0
 
@@ -49,6 +52,11 @@ clear @a[team=zombies] minecraft:brewing_stand
 clear @a[team=zombies] minecraft:sugar_cane
 clear @a[team=zombies] minecraft:redstone
 
+
+
+execute store result score count current_dwarves run team list dwarves
+execute if score count current_dwarves matches ..0 run function dwarves_vs_zombies:zombies_win
+
 scoreboard players set @a damage_taken 0
 bossbar set dwarves_vs_zombies:blood_1 players @a[team=zombies]
 bossbar set dwarves_vs_zombies:blood_2 players @a[team=zombies]
@@ -56,12 +64,12 @@ execute if score count damage_dealt matches ..199 run bossbar set dwarves_vs_zom
 execute if score count damage_dealt matches ..199 run bossbar set dwarves_vs_zombies:blood_2 visible false
 execute if score count damage_dealt matches 200.. run bossbar set dwarves_vs_zombies:blood_1 visible false
 execute if score count damage_dealt matches 200.. run bossbar set dwarves_vs_zombies:blood_2 visible true
-execute as @a[team=zombies] run scoreboard players operation count damage_dealt += @s damage_dealt
+# execute as @a[team=zombies] run scoreboard players operation count damage_dealt += @s damage_dealt
 execute as @a[team=zombies] run scoreboard players operation count blood_2 = count damage_dealt
 execute as @a[team=zombies] run scoreboard players remove count blood_2 200
-scoreboard players set @a[team=zombies] damage_dealt 0
-execute store result storage dwarves_vs_zombies blood int 1 run scoreboard players get count damage_dealt
-execute store result storage dwarves_vs_zombies blood_2 int 1 run scoreboard players get count blood_2
+scoreboard players set @e[scores={damage_dealt=1..}] damage_dealt 0
+execute store result storage dwarves_vs_zombies:generic blood int 1 run scoreboard players get count damage_dealt
+execute store result storage dwarves_vs_zombies:generic blood_2 int 1 run scoreboard players get count blood_2
 execute run function dwarves_vs_zombies:set_bossbar with storage dwarves_vs_zombies
 execute if score count damage_dealt matches 200.. run function dwarves_vs_zombies:set_bossbar_2 with storage dwarves_vs_zombies
 
@@ -85,13 +93,13 @@ execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run execute at @a[team=zombies,scores={health=1..},tag=spawning,tag=zombie,distance=90..] run playsound minecraft:block.gravel.break master @a ~ ~ ~
 execute at @e[type=marker,tag=dwarves_vs_zombies__dwarf_center] run tag @a[team=zombies,scores={health=1..},tag=spawning,distance=90..] remove spawning
 
-scoreboard players remove @a[tag=lich,gamemode=creative,scores={lich_refill_1=1..}] lich_refill_1 1
-scoreboard players remove @a[tag=lich,gamemode=creative,scores={lich_refill_2=1..}] lich_refill_2 1
-execute as @a[tag=lich,gamemode=creative,scores={lich_refill_1=0}] run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_1
-execute if score count damage_dealt matches ..199 run scoreboard players set @a[tag=lich,gamemode=creative,scores={lich_refill_1=0}] lich_refill_1 400
-execute if score count damage_dealt matches 200.. run scoreboard players set @a[tag=lich,gamemode=creative,scores={lich_refill_1=0}] lich_refill_1 300
-execute as @a[tag=lich,gamemode=creative,scores={lich_refill_2=0}] if score count damage_dealt matches 200.. run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_2
-scoreboard players set @a[tag=lich,gamemode=creative,scores={lich_refill_2=0}] lich_refill_2 1800
+scoreboard players remove @a[tag=lich,tag=!grounded,scores={lich_refill_1=1..}] lich_refill_1 1
+scoreboard players remove @a[tag=lich,tag=!grounded,scores={lich_refill_2=1..}] lich_refill_2 1
+execute as @a[tag=lich,tag=!grounded,scores={lich_refill_1=0}] run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_1
+execute if score count damage_dealt matches ..199 run scoreboard players set @a[tag=lich,tag=!grounded,scores={lich_refill_1=0}] lich_refill_1 400
+execute if score count damage_dealt matches 200.. run scoreboard players set @a[tag=lich,tag=!grounded,scores={lich_refill_1=0}] lich_refill_1 300
+execute as @a[tag=lich,tag=!grounded,scores={lich_refill_2=0}] if score count damage_dealt matches 200.. run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_2
+scoreboard players set @a[tag=lich,tag=!grounded,scores={lich_refill_2=0}] lich_refill_2 1800
 
 
 execute at @e[tag=lich] as @e[tag=lich] run tp @e[tag=dwarves_vs_zombies__lich_display] @s

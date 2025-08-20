@@ -50,6 +50,7 @@ scoreboard objectives add giant_jump dummy
 scoreboard objectives add current_dwarves dummy 
 scoreboard objectives add lich_refill_1 dummy 
 scoreboard objectives add lich_refill_2 dummy 
+scoreboard objectives add timer dummy 
 scoreboard players set count blood_2 0
 scoreboard players set count playercount 0
 scoreboard players set count structloaded 0
@@ -61,6 +62,7 @@ scoreboard players set count triangulate_200 200
 scoreboard players set count triangulate_sign -1
 scoreboard players set count triangulate_CMP 0
 scoreboard players set count damage_dealt 0
+scoreboard players set count timer 0
 bossbar add dwarves_vs_zombies:blood_1 {"text":"Blood Collected for Level II","color":"red"}
 bossbar set dwarves_vs_zombies:blood_1 visible true
 bossbar set dwarves_vs_zombies:blood_1 color red
@@ -87,4 +89,6 @@ tag @a remove manifest_2
 tag @a remove manifest_3
 scoreboard players set @a level 1
 execute as @a run scoreboard players add count playercount 1
+team join dwarves @a
+data merge storage dwarves_vs_zombies:generic {ActiveGame:1b}
 schedule function dwarves_vs_zombies:tick 1t replace

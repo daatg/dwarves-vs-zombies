@@ -1,5 +1,5 @@
 title @a[team=zombies,tag=lich] title {"text":"","color":"dark_red"}
-title @a[team=zombies,tag=lich] subtitle {"text":"Your madness destines you the heir.","color":"dark_red"}
+title @a[team=zombies,tag=lich] subtitle {"text":"Your madness heirs you the throne.","color":"dark_red"}
 
 title @a[team=dwarves,tag=new,tag=brewer,tag=fletcher] title {"text":"Calling: Warlock","color":"dark_purple"}
 title @a[team=dwarves,tag=new,tag=brewer,tag=fletcher] subtitle {"text":"Fletcher + Brewer","color":"dark_purple"}

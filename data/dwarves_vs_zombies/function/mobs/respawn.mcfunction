@@ -2,7 +2,6 @@ effect clear @s
 effect give @s darkness 3 0 true
 effect give @s blindness 2 0 true
 clear @s
-say hi
 gamemode adventure @s
 attribute @s block_interaction_range base set 4.5
 tag @s add spawning

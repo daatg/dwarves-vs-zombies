@@ -13,7 +13,6 @@ kill @e[type=marker,name="dwarves_vs_zombies__load_marker"]
 kill @e[type=marker,name="dwarves_vs_zombies__load_core"]
 tag @a remove load_leader
 scoreboard players set count structloaded 2
-team join dwarves @a
 function dwarves_vs_zombies:assign_roles
 schedule clear dwarves_vs_zombies:night_2
 schedule clear dwarves_vs_zombies:morning_2
