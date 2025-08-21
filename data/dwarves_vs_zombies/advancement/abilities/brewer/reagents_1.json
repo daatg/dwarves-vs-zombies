@@ -1,0 +1,21 @@
+{
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:consume_item",
+			"conditions": {
+				"player": {
+                    "team": "dwarves"
+				},
+				"item": {
+					"items": "minecraft:bowl",
+					"components": {
+						"minecraft:rarity": "common"
+					}
+				}
+			}
+		}
+	},
+	"rewards": {
+		"function": "dwarves_vs_zombies:reagents/1"
+	}
+}

@@ -83,27 +83,14 @@ clear @a[tag=brewer] minecraft:milk_bucket
 clear @a[tag=brewer] minecraft:water_bucket
 give @a[tag=brewer] minecraft:water_bucket
 give @a[tag=brewer] minecraft:milk_bucket
-give @a[tag=brewer,scores={level=1}] minecraft:blaze_rod 2
-give @a[tag=brewer,scores={level=1}] minecraft:nether_wart 1
-give @a[tag=brewer,scores={level=1}] minecraft:sugar_cane 4
 give @a[tag=brewer,scores={level=1}] minecraft:lapis_ore 2
 
-give @a[tag=brewer,scores={level=2}] minecraft:blaze_rod 2
-give @a[tag=brewer,scores={level=2}] minecraft:nether_wart 2
-give @a[tag=brewer,scores={level=2}] minecraft:sugar_cane 6
 give @a[tag=brewer,scores={level=2}] minecraft:raw_gold 1
-give @a[tag=brewer,scores={level=2}] minecraft:slime_ball 1
-give @a[tag=brewer,scores={level=2}] minecraft:spider_eye 1
 give @a[tag=brewer,scores={level=2}] minecraft:lapis_ore 3
 
-give @a[tag=brewer,scores={level=3}] minecraft:blaze_rod 2
-give @a[tag=brewer,scores={level=3}] minecraft:nether_wart 3
-give @a[tag=brewer,scores={level=3}] minecraft:sugar_cane 9
 give @a[tag=brewer,scores={level=3}] minecraft:raw_gold 2
-give @a[tag=brewer,scores={level=3}] minecraft:slime_ball 1
-give @a[tag=brewer,scores={level=3}] minecraft:melon 1
-give @a[tag=brewer,scores={level=3}] minecraft:spider_eye 1
-give @a[tag=brewer,scores={level=3}] minecraft:lapis_lazuli 1
 give @a[tag=brewer,scores={level=3}] minecraft:lapis_ore 4
+
+execute as @a[tag=brewer] run function dwarves_vs_zombies:reagents/item
 
 schedule function dwarves_vs_zombies:refill 30s replace
