@@ -16,6 +16,5 @@ scoreboard players operation count current_dwarves -= count playercount
 # If there are no dwarves dead other than the lich
 execute unless score count current_dwarves matches ..-1 run function dwarves_vs_zombies:mobs/lich/abilities/items/manifest
 execute if score count damage_dealt matches 400.. run function dwarves_vs_zombies:mobs/lich/abilities/items/manifest
-
 function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_1
 execute if score count damage_dealt matches 200.. run function dwarves_vs_zombies:mobs/lich/abilities/items/vanished/get_random_tier_2
