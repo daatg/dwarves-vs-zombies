@@ -1,1 +1,3 @@
 function dwarves_vs_zombies:ci/status_2 with storage dwarves_vs_zombies:ci
+tellraw @a [{"text":"CI (info): ","color":"gold"},{"text":"\"","color":"green"},{"storage":"dwarves_vs_zombies:ci","nbt":"head_message","color":"green"},{"text":"\"","color":"green"}]
+tellraw @a [{"text":"CI (info): ","color":"gold"},{"text":"Author: ","color":"white"},{"storage":"dwarves_vs_zombies:ci","nbt":"head_author","color":"white"}]
