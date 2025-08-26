@@ -1,3 +1,3 @@
 tellraw @a [{"text":"CI (info): ","color":"gold"},{"text":"HEAD ","color":"light_purple"},{"text":"tracked to ","color":"white"},{"storage":"dwarves_vs_zombies:ci","nbt":"head_commit","color":"gray"}]
 tellraw @a [{"text":"CI (info): ","color":"gold"},{"text":"\"","color":"green"},{"storage":"dwarves_vs_zombies:ci","nbt":"head_message","color":"green"},{"text":"\"","color":"green"}]
-tellraw @a [{"text":"CI (info): ","color":"gold"},{"text":"Last author: ","color":"white"},{"storage":"dwarves_vs_zombies:ci","nbt":"head_author","color":"white"}]
+tellraw @a [{"text":"CI (info): ","color":"gold"},{"text":"Author: ","color":"white"},{"storage":"dwarves_vs_zombies:ci","nbt":"head_author","color":"white"}]
